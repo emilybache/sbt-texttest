@@ -2,13 +2,14 @@ package org.texttest.sbtplugin
 
 
 import java.io.IOException
+import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths, Path}
 
 import sbt.Logger
 
 class TexttestInstaller(log: Logger) {
 
-  def installUnderTexttestRoot(testCaseLocation: Path, appName: String, customRoot: Option[String]) {
+  def installUnderTexttestRoot(testCaseLocation: Path, appName: String, customRoot: Option[String]): Unit = {
     val texttestRoot = findTexttestRootPath(customRoot, testCaseLocation)
     println(s"Will install TextTests globally with name ${appName} under TEXTTEST_ROOT ${texttestRoot}")
 
@@ -29,6 +30,22 @@ class TexttestInstaller(log: Logger) {
       }
       case uoe: UnsupportedOperationException => {
         throw new RuntimeException("unable to install texttests for app " + appName + " under TEXTTEST_ROOT " + texttestRoot, uoe)
+      }
+    }
+  }
+
+  def writeClasspathToEnvironmentFile(appName: String, extraSearchDirectory: Path, classpath: String): Unit = {
+    val text = s"-cp ${classpath}"
+    try {
+      if (!Files.exists(extraSearchDirectory)) {
+        Files.createDirectories(extraSearchDirectory)
+      }
+      val classpathFile: Path = extraSearchDirectory.resolve(s"interpreter_options.${appName}")
+      Files.write(classpathFile, text.getBytes(StandardCharsets.UTF_8))
+    }
+    catch {
+      case e: IOException => {
+        throw new RuntimeException("Unable to write configuration file for texttest containing the classpath", e)
       }
     }
   }

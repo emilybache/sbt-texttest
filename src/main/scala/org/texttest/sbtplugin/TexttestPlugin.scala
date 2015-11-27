@@ -42,12 +42,18 @@ object TexttestPlugin extends AutoPlugin {
     texttestExecutable := None,
     texttestGlobalInstall := true,
     texttestInstallClasspath := true,
-    texttestExtraSearchDirectory := "${target.value}/texttest_extra_config",
+    texttestExtraSearchDirectory := s"${target.value}/texttest_extra_config",
     texttestRoot := None,
     texttestInstall := {
       val installer = new TexttestInstaller(streams.value.log)
-      installer.installUnderTexttestRoot(Paths.get(texttestTestCaseLocation.value), texttestAppName.value, texttestRoot.value)
-      val classpath = (managedClasspath in Test).value.map(_.data).mkString(File.pathSeparator)
+      if (texttestGlobalInstall.value) {
+        installer.installUnderTexttestRoot(Paths.get(texttestTestCaseLocation.value), texttestAppName.value, texttestRoot.value)
+      }
+      if (texttestInstallClasspath.value) {
+        val classpath = (managedClasspath in Test).value.map(_.data).mkString(File.pathSeparator)
+        installer.writeClasspathToEnvironmentFile(texttestAppName.value, Paths.get(texttestExtraSearchDirectory.value), classpath)
+      }
+
     },
     texttestRun := {
       println(s"run! ${texttestAppName.value} in ${baseDirectory.value}")
