@@ -1,0 +1,22 @@
+# Full path to the System Under Test (or Java Main Class name)
+executable:${TEXTTEST_CHECKOUT}/src/test/sh/run_sbt.sh
+
+# Naming scheme to use for files for stdin,stdout and stderr
+filename_convention_scheme:standard
+
+# Expanded name to use for application
+full_name:sbt-texttest
+
+default_checkout:sbt-texttest
+
+copy_test_path:myapp
+copy_test_path:texttest_home
+
+[collate_file]
+classpath:myapp/target/texttest_extra_config/interpreter_options.myapp
+[end]
+
+[run_dependent_text]
+stdout:\[info\]
+[end]
+

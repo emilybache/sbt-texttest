@@ -1,7 +1,8 @@
 SBT plugin for TextTest
 =======================
 
-Use this plugin in your sbt project to run your texttests.
+Use this plugin in your sbt project to run your texttests. For more information about texttest see http://texttest.org.
+For more information about sbt see http://www.scala-sbt.org/.
 
 There is a sample project that uses this plugin under src/it/texttest/myapp. Documentation is available in sbt:
 
