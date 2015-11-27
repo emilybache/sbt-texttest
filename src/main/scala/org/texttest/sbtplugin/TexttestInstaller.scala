@@ -7,10 +7,9 @@ import java.nio.file.{Files, Paths, Path}
 
 import sbt.Logger
 
-class TexttestInstaller(log: Logger) {
+class TexttestInstaller(log: Logger) extends TexttestUtil(log) {
 
-  def installUnderTexttestRoot(testCaseLocation: Path, appName: String, customRoot: Option[String]): Unit = {
-    val texttestRoot = findTexttestRootPath(customRoot, testCaseLocation)
+  def installUnderTexttestRoot(testCaseLocation: Path, appName: String, texttestRoot: Path): Unit = {
     println(s"Will install TextTests globally with name ${appName} under TEXTTEST_ROOT ${texttestRoot}")
 
     try {
@@ -50,15 +49,6 @@ class TexttestInstaller(log: Logger) {
     }
   }
 
-  private def findTexttestRootPath(customRoot: Option[String], testCaseLocation: Path): Path = {
-    val defaultsInOrder: List[Option[String]] = List(customRoot, sys.env.get("TEXTTEST_ROOT"), sys.env.get("TEXTTEST_HOME"))
-    val validOptions = defaultsInOrder.filter(_.isDefined)
-    if (validOptions.nonEmpty) {
-      log.info("choosing texttestRoot: " + validOptions.head)
-      Paths.get(validOptions.head.get)
-    } else {
-      testCaseLocation
-    }
-  }
+
 
 }
