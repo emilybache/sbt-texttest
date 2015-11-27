@@ -1,1 +1,4 @@
 helptext
+
+# Tests for the texttestInstall task
+install_texttests

@@ -17,6 +17,10 @@ classpath:myapp/target/texttest_extra_config/interpreter_options.myapp
 [end]
 
 [run_dependent_text]
-stdout:\[info\]
+stdout:{INTERNAL writedir}
+stdout:\[info\] Updating{[->]}\[info\] Done updating.
+stdout:\[info\] Loading
+stdout:Waiting for lock
+stdout:(Total time: )\d+ s, completed [\w\s,:\d]+${REPLACE \1}
 [end]
 

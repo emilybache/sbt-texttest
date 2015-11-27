@@ -13,4 +13,32 @@ For Developers
 
 Set an environment variable $SOURCES_ROOT pointing at the folder above this one, so that the path in src/it/texttest/myapp/project/plugins.sbt will be resolved correctly.
 
-Start sbt in the 'myapp' folder. This will compile this plugin and load it into that project. Then you can install and run the sample tests there.
+Start sbt in the 'myapp' folder. This will compile this plugin and load it into that project. There you can test the plugin interactively.
+
+Running the self-tests
+----------------------
+
+1. Set up a texttest personal config file (see below). 
+2. Install this test suite under $TEXTTEST_HOME:
+
+    $> cd $TEXTTEST_HOME
+    $> ln -s ${HOME}/workspace/sbt-texttest/src/it/texttest sbt-texttest
+
+3. Run all the tests using the texttest console:
+
+    $> texttest -a sbttt -con
+
+Set up a personal config file
+-----------------------------
+
+Your texttest personal config file is kept on this path by default, create this file if it doesn't exist:
+
+    ~/.texttest/config
+
+You need a setting like this:
+
+    [checkout_location]
+    sbt-texttest:${HOME}/workspace/sbt-texttest
+    [end]
+
+There is more documentation on the personal config file on the texttest website: [http://texttest.sourceforge.net/index.php?page=documentation_3_27&n=personalpreffile](link)

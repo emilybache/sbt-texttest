@@ -1,6 +1,7 @@
 package org.texttest.sbtplugin
 
-import java.io.File
+import java.io.{IOException, File}
+import java.nio.file.{Files, Path, Paths}
 
 import sbt._
 import sbt.Keys._
@@ -23,6 +24,7 @@ object TexttestPlugin extends AutoPlugin {
 
     val texttestTestCaseLocation = settingKey[String]("Where the texttest test cases are located in this repo. Defaults to {baseDirectory.value}/it/texttest")
     val texttestExecutable = settingKey[Option[String]]("Full path to the texttest executable. If it is on your $PATH then you do not need to set this.")
+    val texttestRoot = settingKey[Option[String]]("The path to TEXTTEST_ROOT - ie where the texttest runner will find your test cases. If the parameter 'texttestGlobalInstall' is set to true, then this must be set, and is expected to be a global location on your machine where you may have many test suites installed. If you don't set this value, we use the environment variable $TEXTTEST_ROOT If that is not set, we will use the environment variable $TEXTTEST_HOME as a fallback option. If neither are set, we use the value of 'texttestTestCaseLocation' as a last resort.")
 
     val texttestGlobalInstall = settingKey[Boolean]("Whether to install this suite of texttests under $TEXTTEST_HOME. Defaults to true.")
     val texttestInstallClasspath = settingKey[Boolean]("Whether to add the project's classpath to the environment used when running your tests. Defaults to true.")
@@ -32,13 +34,6 @@ object TexttestPlugin extends AutoPlugin {
   import autoImport._
 
   override lazy val projectSettings = Seq(
-    texttestInstall := {
-      println(s"install! ${target.value}, classpath ${(managedClasspath in Test).value.map(_.data).mkString(File.pathSeparator)}, texttest_home ${sys.env("TEXTTEST_HOME")}")
-    },
-    texttestRun := {
-      println(s"run! ${texttestAppName.value} in ${baseDirectory.value}")
-      val exitCode = Process("echo", Seq("hello World!")) ! streams.value.log
-    },
     texttestAppName := name.value,
     texttestTestPathSelection := None,
     texttestTestNameSelection := None,
@@ -47,7 +42,17 @@ object TexttestPlugin extends AutoPlugin {
     texttestExecutable := None,
     texttestGlobalInstall := true,
     texttestInstallClasspath := true,
-    texttestExtraSearchDirectory := "${target.value}/texttest_extra_config"
+    texttestExtraSearchDirectory := "${target.value}/texttest_extra_config",
+    texttestRoot := None,
+    texttestInstall := {
+      val installer = new TexttestInstaller(streams.value.log)
+      installer.installUnderTexttestRoot(Paths.get(texttestTestCaseLocation.value), texttestAppName.value, texttestRoot.value)
+      val classpath = (managedClasspath in Test).value.map(_.data).mkString(File.pathSeparator)
+    },
+    texttestRun := {
+      println(s"run! ${texttestAppName.value} in ${baseDirectory.value}")
+      val exitCode = Process("echo", Seq("hello World!")) ! streams.value.log
+    }
   )
 
 
