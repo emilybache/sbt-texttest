@@ -7,7 +7,7 @@ name := "sbt-texttest"
 
 publishMavenStyle := false
 
-bintrayReleaseOnPublish in ThisBuild := false
+bintrayRepository := "sbt-texttest"
 
 bintrayVcsUrl := Some("http://github.com/emilybache/sbt-texttest")
 
