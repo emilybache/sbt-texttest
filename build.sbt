@@ -1,4 +1,3 @@
-import bintray.Keys._
 
 sbtPlugin := true
 
@@ -8,12 +7,10 @@ name := "sbt-texttest"
 
 publishMavenStyle := false
 
-bintrayPublishSettings
+bintrayReleaseOnPublish in ThisBuild := false
 
-repository in bintray := "sbt-plugins"
+bintrayVcsUrl := Some("http://github.com/emilybache/sbt-texttest")
 
 licenses += ("MIT", url("https://github.com/emilybache/sbt-texttest/blob/master/license.txt"))
-
-bintrayOrganization in bintray := None
 
 sbtrelease.ReleasePlugin.releaseSettings
