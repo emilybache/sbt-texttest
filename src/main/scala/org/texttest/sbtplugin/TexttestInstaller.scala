@@ -1,7 +1,7 @@
 package org.texttest.sbtplugin
 
 
-import java.io.IOException
+import java.io.{File, IOException}
 import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths, Path}
 
@@ -10,7 +10,7 @@ import sbt.Logger
 class TexttestInstaller(log: Logger) extends TexttestUtil(log) {
 
   def installUnderTexttestRoot(testCaseLocation: Path, appName: String, texttestRoot: Path): Unit = {
-    println(s"Will install TextTests globally with name ${appName} under TEXTTEST_ROOT ${texttestRoot}")
+    log.info(s"Will install TextTests globally with name ${appName} under TEXTTEST_ROOT ${texttestRoot}")
 
     try {
       if (!Files.exists(texttestRoot)) {
@@ -33,8 +33,8 @@ class TexttestInstaller(log: Logger) extends TexttestUtil(log) {
     }
   }
 
-  def writeClasspathToEnvironmentFile(appName: String, extraSearchDirectory: Path, classpath: String): Unit = {
-    val text = s"-cp ${classpath}"
+  def writeClasspathToEnvironmentFile(appName: String, extraSearchDirectory: Path, classpath: List[File]): Unit = {
+    val text = s"-cp ${classpath.mkString(File.pathSeparator)}"
     try {
       if (!Files.exists(extraSearchDirectory)) {
         Files.createDirectories(extraSearchDirectory)

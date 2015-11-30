@@ -22,8 +22,10 @@ stdout:\[info\] Loading project definition
 stdout:\[info\] Updating{[->]}\[info\] Done updating.
 stdout:\[info\] Loading
 stdout:\[info\] Compiling
+stdout:(\[info\] )\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d,\d\d\d{REPLACE \1<timestamp>}
 stdout:Waiting for lock
 stdout:(Total time: )\d+ s, completed [\w\s,:\d]+${REPLACE \1}
+classpath:{INTERNAL writedir}{REPLACE <writedir>}
 classpath:/[\w/]+(/\.ivy2/cache/){REPLACE HOME\1}
 [end]
 

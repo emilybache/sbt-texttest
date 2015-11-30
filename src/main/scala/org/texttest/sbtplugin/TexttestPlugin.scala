@@ -40,7 +40,7 @@ object TexttestPlugin extends AutoPlugin {
     texttestTestPathSelection := None,
     texttestTestNameSelection := None,
     texttestBatchSessionName := "all",
-    texttestTestCaseLocation := s"${baseDirectory.value}/it/texttest",
+    texttestTestCaseLocation := s"${baseDirectory.value}/src/it/texttest",
     texttestExecutable := None,
     texttestGlobalInstall := true,
     texttestInstallClasspath := true,
@@ -55,13 +55,14 @@ object TexttestPlugin extends AutoPlugin {
         installer.installUnderTexttestRoot(Paths.get(texttestTestCaseLocation.value), texttestAppName.value, texttestRootPath)
       }
       if (texttestInstallClasspath.value) {
-        val classpath = (managedClasspath in Test).value.map(_.data).mkString(File.pathSeparator)
+        val classpath = (fullClasspath in Test).value.map(_.data).toList
         installer.writeClasspathToEnvironmentFile(texttestAppName.value, Paths.get(texttestExtraSearchDirectory.value), classpath)
       }
 
     },
     texttestRun := {
-      println(s"running texttest application ${texttestAppName.value} in ${baseDirectory.value}")
+      texttestInstall.value // install task is needed before the run task will be able to work
+      streams.value.log.info(s"running texttest application ${texttestAppName.value} in ${baseDirectory.value}")
       val runner = new TexttestRunner(streams.value.log)
       val texttest = runner.findTextTestExecutable(texttestExecutable.value)
       val texttestRootPath = runner.findTexttestRootPath(texttestRoot.value, Paths.get(texttestTestCaseLocation.value))

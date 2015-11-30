@@ -1,1 +1,1 @@
--cp /Users/emilyb/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.7.jar
+-cp /Users/emilyb/.texttest/tmp/sbttt.30Nov095225.45487/sbttt/install_texttests/global_install/myapp/target/scala-2.11/test-classes:/Users/emilyb/.texttest/tmp/sbttt.30Nov095225.45487/sbttt/install_texttests/global_install/myapp/target/scala-2.11/classes:/Users/emilyb/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.7.jar
