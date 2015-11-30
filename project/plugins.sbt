@@ -4,4 +4,4 @@ resolvers += Resolver.url(
   Resolver.ivyStylePatterns)
 
 addSbtPlugin("me.lessis" % "bintray-sbt" % "0.2.1")
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "0.8.4")
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "0.8.5")
