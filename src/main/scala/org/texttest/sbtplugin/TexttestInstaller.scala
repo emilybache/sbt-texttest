@@ -33,7 +33,7 @@ class TexttestInstaller(log: Logger) extends TexttestUtil(log) {
     }
   }
 
-  def writeClasspathToEnvironmentFile(appName: String, extraSearchDirectory: Path, classpath: List[File]): Unit = {
+  def writeClasspathToInterpreterOptionsFile(appName: String, extraSearchDirectory: Path, classpath: List[File]): Unit = {
     val text = s"-cp ${classpath.mkString(File.pathSeparator)}"
     try {
       if (!Files.exists(extraSearchDirectory)) {

@@ -56,7 +56,7 @@ object TexttestPlugin extends AutoPlugin {
       }
       if (texttestInstallClasspath.value) {
         val classpath = (fullClasspath in Test).value.map(_.data).toList
-        installer.writeClasspathToEnvironmentFile(texttestAppName.value, Paths.get(texttestExtraSearchDirectory.value), classpath)
+        installer.writeClasspathToInterpreterOptionsFile(texttestAppName.value, Paths.get(texttestExtraSearchDirectory.value), classpath)
       }
 
     },

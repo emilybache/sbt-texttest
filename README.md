@@ -13,7 +13,8 @@ For Developers
 
 Set an environment variable $SOURCES_ROOT pointing at the folder above this one, so that the path in src/it/texttest/myapp/project/plugins.sbt will be resolved correctly.
 
-Start sbt in the 'myapp' folder. This will compile this plugin and load it into that project. There you can test the plugin interactively.
+Most of the test cases have a 'myapp' folder, which is a test project used to test this plugin. You can start sbt in any
+of these 'myapp' folders. This will compile this plugin and load it into that project. There you can test the plugin interactively.
 
 Running the self-tests
 ----------------------
@@ -35,7 +36,7 @@ Your texttest personal config file is kept on this path by default, create this 
 
     ~/.texttest/config
 
-You need a setting like this:
+In that file, you need a setting like this, pointing out the location of your clone of this project:
 
     [checkout_location]
     sbt-texttest:${HOME}/workspace/sbt-texttest
