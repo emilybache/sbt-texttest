@@ -5,11 +5,11 @@ organization := "org.texttest"
 
 name := "sbt-texttest"
 
-publishMavenStyle := false
+//publishMavenStyle := false
 
-bintrayRepository := "sbt-texttest"
+//bintrayRepository := "sbt-texttest"
 
-bintrayVcsUrl := Some("http://github.com/emilybache/sbt-texttest")
+//bintrayVcsUrl := Some("http://github.com/emilybache/sbt-texttest")
 
 licenses += ("MIT", url("https://github.com/emilybache/sbt-texttest/blob/master/license.txt"))
 
