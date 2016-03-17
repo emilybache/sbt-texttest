@@ -65,40 +65,43 @@ class TexttestRunner(log: Logger) extends TexttestUtil(log) {
                   texttestTestCaseLocation: Path,
                   texttestRootPath: Path,
                   projectDir: Path,
-                  appName: String,
+                  appNames: List[String],
                   batchSessionName: String,
                   sandbox: Path,
                   testFailureIgnore: Boolean,
-                  testPathSelection: Option[String],
-                  testNameSelection: Option[String]): Unit = {
-    var arguments: List[String] = List(
-              texttestExecutable.toString,
-              "-a", appName,
-              "-b", batchSessionName,
-              "-c", projectDir.toString,
-              "-d", texttestTestCaseLocation + System.getProperty("path.separator") + texttestRootPath.toString)
-    arguments = testPathSelection match {
-      case Some(pathSelection) => arguments ::: List("-ts", pathSelection)
-      case _ => arguments
-    }
-    arguments = testNameSelection match {
-      case Some(nameSelection) => arguments ::: List("-t", nameSelection)
-      case _ => arguments
-    }
-    log.info("Will start texttest with this command: " + arguments)
+                  testPathSelection: Map[String, String],
+                  testNameSelection: Map[String, String]): Unit = {
 
-    try {
-      val exitStatus = Process(arguments, projectDir.toFile, "TEXTTEST_TMP" -> sandbox.toString) ! log
-      if (exitStatus != 0 && !testFailureIgnore) {
-        throw new RuntimeException("There were test failures")
+    appNames.foreach { (appName: String) =>
+      var arguments: List[String] = List(
+        texttestExecutable.toString,
+        "-a", appName,
+        "-b", batchSessionName,
+        "-c", projectDir.toString,
+        "-d", texttestTestCaseLocation + System.getProperty("path.separator") + texttestRootPath.toString)
+      arguments = testPathSelection.get(appName) match {
+        case Some(pathSelection) => arguments ::: List("-ts", pathSelection)
+        case _ => arguments
       }
-    }
-    catch {
-      case ioe: IOException => {
-        throw new RuntimeException("TextTest failed to execute", ioe)
+      arguments = testNameSelection.get(appName) match {
+        case Some(nameSelection) => arguments ::: List("-t", nameSelection)
+        case _ => arguments
       }
-      case ie: InterruptedException => {
-        throw new RuntimeException("TextTest failed to execute", ie)
+      log.info("Will start texttest with this command: " + arguments)
+
+      try {
+        val exitStatus = Process(arguments, projectDir.toFile, "TEXTTEST_TMP" -> sandbox.toString) ! log
+        if (exitStatus != 0 && !testFailureIgnore) {
+          throw new RuntimeException("There were test failures")
+        }
+      }
+      catch {
+        case ioe: IOException => {
+          throw new RuntimeException("TextTest failed to execute", ioe)
+        }
+        case ie: InterruptedException => {
+          throw new RuntimeException("TextTest failed to execute", ie)
+        }
       }
     }
   }

@@ -27,5 +27,8 @@ stdout:Waiting for lock
 stdout:(Total time: )\d+ s, completed [\w\s,:\d]+${REPLACE \1}
 classpath:{INTERNAL writedir}{REPLACE <writedir>}
 classpath:/[\w/]+(/\.ivy2/cache/){REPLACE HOME\1}
+stderr:Java HotSpot(TM) 64-Bit Server VM warning
+stdout:([succeeded|FAILED] on )[\w\d\-]+{REPLACE \1<machine name>}
+stdout:Removing previous write directory
 [end]
 

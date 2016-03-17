@@ -9,21 +9,25 @@ import sbt.Logger
 
 class TexttestInstaller(log: Logger) extends TexttestUtil(log) {
 
-  def installUnderTexttestRoot(testCaseLocation: Path, appName: String, texttestRoot: Path): Unit = {
-    log.info(s"Will install TextTests globally with name ${appName} under TEXTTEST_ROOT ${texttestRoot}")
+  def installUnderTexttestRoot(testCaseLocation: Path, appNames: List[String], texttestRoot: Path): Unit = {
+    log.info(s"Will install TextTests globally with name ${appNames} under TEXTTEST_ROOT ${texttestRoot}")
 
-    try {
       if (!Files.exists(texttestRoot)) {
         log.warn("TEXTTEST_ROOT did not exist, creating " + texttestRoot)
         Files.createDirectories(texttestRoot)
       }
+      appNames.map { (appName: String) => createSymbolicLinkUnderTexttestHome(testCaseLocation, appName, texttestRoot)    }
+  }
+
+  private def createSymbolicLinkUnderTexttestHome(testCaseLocation: Path, appName: String, texttestRoot: Path): Unit =
+    try {
       val theAppUnderTextTestHome: Path = texttestRoot.resolve(appName)
       if (Files.isSymbolicLink(theAppUnderTextTestHome)) {
         Files.delete(theAppUnderTextTestHome)
       }
       Files.createSymbolicLink(theAppUnderTextTestHome, testCaseLocation)
-    }
-    catch {
+
+    } catch {
       case ioe: IOException => {
         throw new RuntimeException("unable to install texttests for app " + appName + " under TEXTTEST_ROOT " + texttestRoot, ioe)
       }
@@ -31,16 +35,18 @@ class TexttestInstaller(log: Logger) extends TexttestUtil(log) {
         throw new RuntimeException("unable to install texttests for app " + appName + " under TEXTTEST_ROOT " + texttestRoot, uoe)
       }
     }
-  }
 
-  def writeClasspathToInterpreterOptionsFile(appName: String, extraSearchDirectory: Path, classpath: List[File]): Unit = {
+
+  def writeClasspathToInterpreterOptionsFile(appNames: List[String], extraSearchDirectory: Path, classpath: List[File]): Unit = {
     val text = s"-cp ${classpath.mkString(File.pathSeparator)}"
     try {
       if (!Files.exists(extraSearchDirectory)) {
         Files.createDirectories(extraSearchDirectory)
       }
-      val classpathFile: Path = extraSearchDirectory.resolve(s"interpreter_options.${appName}")
-      Files.write(classpathFile, text.getBytes(StandardCharsets.UTF_8))
+      appNames.map { (appName: String) =>
+        val classpathFile: Path = extraSearchDirectory.resolve(s"interpreter_options.${appName}")
+        Files.write(classpathFile, text.getBytes(StandardCharsets.UTF_8))
+      }
     }
     catch {
       case e: IOException => {

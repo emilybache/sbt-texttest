@@ -1,5 +1,8 @@
 no_tests
 tests_failing
 tests_passing
+
+# When you have two apps and the test path selection is only for one of them
+select_a_testpath_for_one_app
 select_a_testname
 select_a_testpath

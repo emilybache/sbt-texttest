@@ -17,9 +17,9 @@ object TexttestPlugin extends AutoPlugin {
     val texttestInstall = taskKey[Unit]("install texttests under TEXTTEST_HOME, and create classpath file needed for tests to run.")
     val texttestRun = taskKey[Unit]("run texttests found under it/texttest")
 
-    val texttestAppName = settingKey[String]("texttest application name, sent to texttest with '-a' flag. Defaults to {name.value}.")
-    val texttestTestPathSelection = settingKey[Option[String]]("texttest path selection, sent to texttest with '-ts' flag. Optional.")
-    val texttestTestNameSelection = settingKey[Option[String]]("texttest test name selection, sent to texttest with '-t' flag. Optional.")
+    val texttestAppNames = settingKey[List[String]]("texttest application names, sent to texttest with '-a' flag. Defaults to List({name.value}).")
+    val texttestTestPathSelection = settingKey[Map[String, String]]("texttest path selection, sent to texttest with '-ts' flag. Optional.")
+    val texttestTestNameSelection = settingKey[Map[String, String]]("texttest test name selection, sent to texttest with '-t' flag. Optional.")
     val texttestBatchSessionName = settingKey[String]("texttest batch session name, sent to texttest with '-b' flag. Defaults to 'all'")
 
     val texttestTestCaseLocation = settingKey[String]("Where the texttest test cases are located in this repo. Defaults to {baseDirectory.value}/it/texttest")
@@ -36,9 +36,9 @@ object TexttestPlugin extends AutoPlugin {
   import autoImport._
 
   override lazy val projectSettings = Seq(
-    texttestAppName := name.value,
-    texttestTestPathSelection := None,
-    texttestTestNameSelection := None,
+    texttestAppNames := List(name.value),
+    texttestTestPathSelection := Map(),
+    texttestTestNameSelection := Map(),
     texttestBatchSessionName := "all",
     texttestTestCaseLocation := s"${baseDirectory.value}/src/it/texttest",
     texttestExecutable := None,
@@ -52,17 +52,17 @@ object TexttestPlugin extends AutoPlugin {
       val installer = new TexttestInstaller(streams.value.log)
       if (texttestGlobalInstall.value) {
         val texttestRootPath = installer.findTexttestRootPath(texttestRoot.value, Paths.get(texttestTestCaseLocation.value))
-        installer.installUnderTexttestRoot(Paths.get(texttestTestCaseLocation.value), texttestAppName.value, texttestRootPath)
+        installer.installUnderTexttestRoot(Paths.get(texttestTestCaseLocation.value), texttestAppNames.value, texttestRootPath)
       }
       if (texttestInstallClasspath.value) {
         val classpath = (fullClasspath in Test).value.map(_.data).toList
-        installer.writeClasspathToInterpreterOptionsFile(texttestAppName.value, Paths.get(texttestExtraSearchDirectory.value), classpath)
+        installer.writeClasspathToInterpreterOptionsFile(texttestAppNames.value, Paths.get(texttestExtraSearchDirectory.value), classpath)
       }
 
     },
     texttestRun := {
       texttestInstall.value // install task is needed before the run task will be able to work
-      streams.value.log.info(s"running texttest application ${texttestAppName.value} in ${baseDirectory.value}")
+      streams.value.log.info(s"running texttest applications ${texttestAppNames.value} in ${baseDirectory.value}")
       val runner = new TexttestRunner(streams.value.log)
       val texttest = runner.findTextTestExecutable(texttestExecutable.value)
       val texttestRootPath = runner.findTexttestRootPath(texttestRoot.value, Paths.get(texttestTestCaseLocation.value))
@@ -70,7 +70,7 @@ object TexttestPlugin extends AutoPlugin {
         Paths.get(texttestTestCaseLocation.value),
         texttestRootPath,
         baseDirectory.value.toPath,
-        texttestAppName.value,
+        texttestAppNames.value,
         texttestBatchSessionName.value,
         Paths.get(texttestSandbox.value),
         texttestFailureIgnore.value,
