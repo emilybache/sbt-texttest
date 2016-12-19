@@ -26,7 +26,7 @@ class TexttestInstaller(log: Logger) extends TexttestUtil(log) {
         Files.delete(theAppUnderTextTestHome)
       }
       Files.createSymbolicLink(theAppUnderTextTestHome, testCaseLocation)
-
+      log.info(s"created symbolic link ${theAppUnderTextTestHome} -> ${testCaseLocation}")
     } catch {
       case ioe: IOException => {
         throw new RuntimeException("unable to install texttests for app " + appName + " under TEXTTEST_ROOT " + texttestRoot, ioe)
@@ -44,8 +44,10 @@ class TexttestInstaller(log: Logger) extends TexttestUtil(log) {
         Files.createDirectories(extraSearchDirectory)
       }
       appNames.map { (appName: String) =>
-        val classpathFile: Path = extraSearchDirectory.resolve(s"interpreter_options.${appName}")
+        val filename: String = s"interpreter_options.${appName}"
+        val classpathFile: Path = extraSearchDirectory.resolve(filename)
         Files.write(classpathFile, text.getBytes(StandardCharsets.UTF_8))
+        log.info(s"wrote file ${classpathFile} containing classpath")
       }
     }
     catch {

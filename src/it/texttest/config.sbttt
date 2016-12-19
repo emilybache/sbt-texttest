@@ -11,6 +11,7 @@ default_checkout:sbt-texttest
 
 copy_test_path:myapp
 copy_test_path:texttest_home
+copy_test_path:dependency
 
 [collate_file]
 classpath:myapp/target/texttest_extra_config/interpreter_options.myapp
@@ -30,5 +31,8 @@ classpath:/[\w/]+(/\.ivy2/cache/){REPLACE HOME\1}
 stderr:Java HotSpot(TM) 64-Bit Server VM warning
 stdout:([succeeded|FAILED] on )[\w\d\-]+{REPLACE \1<machine name>}
 stdout:Removing previous write directory
+stdout:Loading global plugins from
+stdout:Set current project to dependency{[->]}Total time: \d+ s, completed
+stdout:(jar: )[\/\.\w\d]+(org){REPLACE \1\2}
 [end]
 

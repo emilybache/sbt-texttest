@@ -1,16 +1,12 @@
 sbt help texttest*
 [info] Loading global plugins from /home/emilyb/.sbt/0.13/plugins
-Waiting for lock on /home/emilyb/.ivy2/.sbt.ivy.lock to be available...
 [info] Loading project definition from /home/emilyb/workspace/sbt-texttest/project
-[info] Loading project definition from /home/emilyb/.texttest/tmp/sbttt.16Mar103551.23167/sbttt/helptext/myapp/project
-Waiting for lock on /home/emilyb/.ivy2/.sbt.ivy.lock to be available...
-[info] Updating {file:/home/emilyb/.texttest/tmp/sbttt.16Mar103551.23167/sbttt/helptext/myapp/project/}root...
-Waiting for lock on /home/emilyb/.ivy2/.sbt.ivy.lock to be available...
-[info] Resolving org.texttest#sbt-texttest;1.8-SNAPSHOT ...
+[info] Loading project definition from /home/emilyb/.texttest/tmp/sbttt.19Dec152312.14336/sbttt/helptext/myapp/project
+[info] Updating {file:/home/emilyb/.texttest/tmp/sbttt.19Dec152312.14336/sbttt/helptext/myapp/project/}root...
+[info] Resolving org.texttest#sbt-texttest;1.9-SNAPSHOT ...
 [info] Resolving org.scala-sbt#root;0.0 ...
 [info] Resolving com.pagero#sbt-global;1.0-SNAPSHOT ...
-[info] Resolving net.virtual-void#sbt-dependency-graph;0.8.1 ...
-[info] Resolving com.github.mdr#ascii-graphs_2.10;0.0.3 ...
+[info] Resolving commons-io#commons-io;2.5 ...
 [info] Resolving org.scala-lang#scala-library;2.10.5 ...
 [info] Resolving org.scala-sbt#sbt;0.13.9 ...
 [info] Resolving org.scala-sbt#main;0.13.9 ...
@@ -67,7 +63,7 @@ Waiting for lock on /home/emilyb/.ivy2/.sbt.ivy.lock to be available...
 [info] Resolving org.scala-lang#jline;2.10.5 ...
 [info] Resolving org.fusesource.jansi#jansi;1.4 ...
 [info] Done updating.
-[info] Set current project to myapp (in build file:/home/emilyb/.texttest/tmp/sbttt.16Mar103551.23167/sbttt/helptext/myapp/)
+[info] Set current project to myapp (in build file:/home/emilyb/.texttest/tmp/sbttt.19Dec152312.14336/sbttt/helptext/myapp/)
 
 texttestFailureIgnore
 
@@ -79,7 +75,7 @@ texttestTestPathSelection
 
 texttestGlobalInstall
 
-  Whether to install this suite of texttests under $TEXTTEST_HOME. Defaults to true.
+  Whether to install this suite of texttests under $TEXTTEST_HOME. Defaults to false. If you set this to true, you must make sure texttestRoot is set correctly
 
 texttestExecutable
 
@@ -87,11 +83,11 @@ texttestExecutable
 
 texttestSandbox
 
-  Where texttest should put test result files and files relating to test runs. Defaults to target/sandbox
+  Where texttest should put test result files and files relating to test runs. Defaults to {target.value}/sandbox
 
 texttestTestCaseLocation
 
-  Where the texttest test cases are located in this repo. Defaults to {baseDirectory.value}/it/texttest
+  Where the texttest test cases are located in this repo. Defaults to {baseDirectory.value}/src/it/texttest
 
 texttestExtraSearchDirectory
 
@@ -107,15 +103,19 @@ texttestBatchSessionName
 
 texttestRoot
 
-  The path to TEXTTEST_ROOT - ie where the texttest runner will find your test cases. If the parameter 'texttestGlobalInstall' is set to true, then this must be set, and is expected to be a global location on your machine where you may have many test suites installed. If you don't set this value, we use the environment variable $TEXTTEST_ROOT If that is not set, we will use the environment variable $TEXTTEST_HOME as a fallback option. If neither are set, we use the value of 'texttestTestCaseLocation' as a last resort.
+  The path to TEXTTEST_ROOT - ie where the texttest runner will find your test cases. If you set this to 'None' it will use the environment variables 'TEXTTEST_ROOT' or 'TEXTTEST_HOME' instead. It defaults to {baseDirectory.value}/src/it/texttest:{target.value}/texttest_extra_config
 
 texttestTestNameSelection
 
   texttest test name selection, sent to texttest with '-t' flag. Optional.
 
+unzipDependencyJars
+
+  take dependency jar files found from 'texttestDependencies' and unzip them under the texttestExtraConfigDir. This is useful if you have config files or data in dependent projects, that you wish to import in this project
+
 texttestRun
 
-  run texttests found under it/texttest
+  run texttests found under src/it/texttest
 
 texttestInstall
 
@@ -124,4 +124,8 @@ texttestInstall
 texttestAppNames
 
   texttest application names, sent to texttest with '-a' flag. Defaults to List({name.value}).
+
+texttestDependencies
+
+  Which dependencies to unzip their jar files under texttestExtraSearchDirectory so that texttest can access them
 

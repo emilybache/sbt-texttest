@@ -13,4 +13,6 @@ name := "sbt-texttest"
 
 licenses += ("MIT", url("https://github.com/emilybache/sbt-texttest/blob/master/license.txt"))
 
+libraryDependencies += "commons-io" % "commons-io" % "2.5"
+
 sbtrelease.ReleasePlugin.releaseSettings

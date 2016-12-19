@@ -1,13 +1,15 @@
+[0m[[0minfo[0m] [0mLoading global plugins from /home/emilyb/.sbt/0.13/plugins[0m
+[0m[[0minfo[0m] [0mSet current project to dependency (in build file:/home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/dependency/)[0m
+[0m[[32msuccess[0m] [0mTotal time: 0 s, completed Dec 19, 2016 3:10:40 PM[0m
 sbt texttestRun
 [info] Loading global plugins from /home/emilyb/.sbt/0.13/plugins
 [info] Loading project definition from /home/emilyb/workspace/sbt-texttest/project
-[info] Loading project definition from /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/project
-[info] Updating {file:/home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/project/}root...
-[info] Resolving org.texttest#sbt-texttest;1.8-SNAPSHOT ...
+[info] Loading project definition from /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/project
+[info] Updating {file:/home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/project/}root...
+[info] Resolving org.texttest#sbt-texttest;1.9-SNAPSHOT ...
 [info] Resolving org.scala-sbt#root;0.0 ...
 [info] Resolving com.pagero#sbt-global;1.0-SNAPSHOT ...
-[info] Resolving net.virtual-void#sbt-dependency-graph;0.8.1 ...
-[info] Resolving com.github.mdr#ascii-graphs_2.10;0.0.3 ...
+[info] Resolving commons-io#commons-io;2.5 ...
 [info] Resolving org.scala-lang#scala-library;2.10.5 ...
 [info] Resolving org.scala-sbt#sbt;0.13.9 ...
 [info] Resolving org.scala-sbt#main;0.13.9 ...
@@ -64,8 +66,8 @@ sbt texttestRun
 [info] Resolving org.scala-lang#jline;2.10.5 ...
 [info] Resolving org.fusesource.jansi#jansi;1.4 ...
 [info] Done updating.
-[info] Set current project to myapp (in build file:/home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/)
-[info] Updating {file:/home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/}myapp...
+[info] Set current project to myapp (in build file:/home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/)
+[info] Updating {file:/home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/}myapp...
 [info] Resolving org.scala-lang#scala-library;2.11.7 ...
 [info] Resolving org.scala-lang#scala-compiler;2.11.7 ...
 [info] Resolving org.scala-lang#scala-reflect;2.11.7 ...
@@ -73,38 +75,37 @@ sbt texttestRun
 [info] Resolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 ...
 [info] Resolving jline#jline;2.12.1 ...
 [info] Done updating.
-[info] choosing texttestRoot: Some(/home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home)
-[info] Will install TextTests globally with name List(myapp, anotherapp) under TEXTTEST_ROOT /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home
-[warn] TEXTTEST_ROOT did not exist, creating /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home
-[info] running texttest applications List(myapp, anotherapp) in /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp
+[info] wrote file /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/target/texttest_extra_config/interpreter_options.myapp containing classpath
+[info] wrote file /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/target/texttest_extra_config/interpreter_options.anotherapp containing classpath
+[info] running texttest applications List(myapp, anotherapp) in /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp
 [info] found texttest on PATH at location: Some(/usr/local/bin/texttest)
-[info] choosing texttestRoot: Some(/home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home)
-[info] Will start texttest with this command: List(/usr/local/bin/texttest, -a, myapp, -b, all, -c, /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp, -d, /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/src/it/texttest:/home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home, -ts, goodbye)
-[info] 2016-03-16 13:16:06,722 - Using local queues for Application MyApp, checkout /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp
-[info] 2016-03-16 13:16:06,725 - Q: Submitting MyApp test-case goodbye to default local queue
-[info] 2016-03-16 13:16:06,829 - S: MyApp test-case goodbye succeeded on LP187
-[info] 2016-03-16 13:16:06,831 - Results:
-[info] 2016-03-16 13:16:06,831 - 
-[info] 2016-03-16 13:16:06,831 - Tests Run: 1
-[info] Will start texttest with this command: List(/usr/local/bin/texttest, -a, anotherapp, -b, all, -c, /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp, -d, /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/src/it/texttest:/home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home)
-[info] 2016-03-16 13:16:07,806 - Using local queues for Application AnotherApp, checkout /home/emilyb/.texttest/tmp/sbttt.16Mar131551.28254/sbttt/run_texttests/select_a_testpath_for_one_app/myapp
-[info] 2016-03-16 13:16:07,808 - Q: Submitting AnotherApp test-case hello to default local queue
-[info] 2016-03-16 13:16:07,811 - Q: Submitting AnotherApp test-case goodbye to default local queue
-[info] 2016-03-16 13:16:07,896 - S: AnotherApp test-case hello FAILED on LP187 : differences in stdout
-[info] 2016-03-16 13:16:07,897 - S: AnotherApp test-case goodbye succeeded on LP187
-[info] 2016-03-16 13:16:07,898 - Results:
-[info] 2016-03-16 13:16:07,898 - 
-[info] 2016-03-16 13:16:07,898 - Tests that did not succeed:
-[info] 2016-03-16 13:16:07,898 -   AnotherApp test-case hello FAILED on LP187 : differences in stdout
-[info] 2016-03-16 13:16:07,898 - 
-[info] 2016-03-16 13:16:07,898 - Tests Run: 2, Failures: 1
+[info] choosing texttestRoot: Some(/home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home)
+[info] Will start texttest with this command: List(/usr/local/bin/texttest, -a, myapp, -b, all, -c, /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp, -d, /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/src/it/texttest:/home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home, -ts, goodbye)
+[info] 2016-12-19 15:10:52,156 - Using local queues for Application MyApp, checkout /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp
+[info] 2016-12-19 15:10:52,159 - Q: Submitting MyApp test-case goodbye to default local queue
+[info] 2016-12-19 15:10:52,250 - S: MyApp test-case goodbye succeeded on LP187
+[info] 2016-12-19 15:10:52,251 - Results:
+[info] 2016-12-19 15:10:52,251 - 
+[info] 2016-12-19 15:10:52,251 - Tests Run: 1
+[info] Will start texttest with this command: List(/usr/local/bin/texttest, -a, anotherapp, -b, all, -c, /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp, -d, /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp/src/it/texttest:/home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/texttest_home)
+[info] 2016-12-19 15:10:53,227 - Using local queues for Application AnotherApp, checkout /home/emilyb/.texttest/tmp/sbttt.19Dec151011.29455/sbttt/run_texttests/select_a_testpath_for_one_app/myapp
+[info] 2016-12-19 15:10:53,229 - Q: Submitting AnotherApp test-case hello to default local queue
+[info] 2016-12-19 15:10:53,233 - Q: Submitting AnotherApp test-case goodbye to default local queue
+[info] 2016-12-19 15:10:53,321 - S: AnotherApp test-case hello FAILED on LP187 : differences in stdout
+[info] 2016-12-19 15:10:53,323 - S: AnotherApp test-case goodbye succeeded on LP187
+[info] 2016-12-19 15:10:53,324 - Results:
+[info] 2016-12-19 15:10:53,324 - 
+[info] 2016-12-19 15:10:53,324 - Tests that did not succeed:
+[info] 2016-12-19 15:10:53,324 -   AnotherApp test-case hello FAILED on LP187 : differences in stdout
+[info] 2016-12-19 15:10:53,324 - 
+[info] 2016-12-19 15:10:53,324 - Tests Run: 2, Failures: 1
 java.lang.RuntimeException: There were test failures
 	at org.texttest.sbtplugin.TexttestRunner$$anonfun$runTexttest$1.apply(TexttestRunner.scala:95)
 	at org.texttest.sbtplugin.TexttestRunner$$anonfun$runTexttest$1.apply(TexttestRunner.scala:75)
 	at scala.collection.immutable.List.foreach(List.scala:318)
 	at org.texttest.sbtplugin.TexttestRunner.runTexttest(TexttestRunner.scala:75)
-	at org.texttest.sbtplugin.TexttestPlugin$$anonfun$projectSettings$14.apply(TexttestPlugin.scala:69)
-	at org.texttest.sbtplugin.TexttestPlugin$$anonfun$projectSettings$14.apply(TexttestPlugin.scala:63)
+	at org.texttest.sbtplugin.TexttestPlugin$$anonfun$projectSettings$16.apply(TexttestPlugin.scala:95)
+	at org.texttest.sbtplugin.TexttestPlugin$$anonfun$projectSettings$16.apply(TexttestPlugin.scala:88)
 	at scala.Function1$$anonfun$compose$1.apply(Function1.scala:47)
 	at sbt.$tilde$greater$$anonfun$$u2219$1.apply(TypeFunctions.scala:40)
 	at sbt.std.Transform$$anon$4.work(System.scala:63)
@@ -123,4 +124,4 @@ java.lang.RuntimeException: There were test failures
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
 [error] (*:texttestRun) There were test failures
-[error] Total time: 2 s, completed Mar 16, 2016 1:16:08 PM
+[error] Total time: 2 s, completed Dec 19, 2016 3:10:54 PM

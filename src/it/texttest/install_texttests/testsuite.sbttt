@@ -1,2 +1,5 @@
 global_install
 two_apps
+
+# Tests with config file in dependent jar
+unzipDependencies

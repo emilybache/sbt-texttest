@@ -1,0 +1,2 @@
+
+extra_config_directory:${TEXTTEST_CHECKOUT}/target/texttest_extra_config

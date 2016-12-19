@@ -19,16 +19,29 @@ of these 'myapp' folders. This will compile this plugin and load it into that pr
 Running the self-tests
 ----------------------
 
+Alternative 1: local install
+
+1. Start the texttest GUI from this directory:
+
+    $> texttest -a sbttt -c $PWD -d $PWD/src/it/texttest
+    
+Select the tests you wish to run interactively. If you want to run on the commandline instead, add the argument '-con'
+
+Alternative 2: global install
+
 1. Set up a texttest personal config file (see below). 
 2. Install this test suite under $TEXTTEST_HOME:
 
     $> cd $TEXTTEST_HOME
     $> ln -s ${HOME}/workspace/sbt-texttest/src/it/texttest sbt-texttest
+    
+3. Run all the tests using the texttest GUI:
 
-3. Run all the tests using the texttest console:
-
-    $> texttest -a sbttt -con
-
+    $> texttest -a sbttt
+    
+Since you have installed them globally, you can run this command from any directory.
+Select the tests you wish to run interactively. If you want to run on the commandline instead, add the argument '-con'
+    
 Set up a personal config file
 -----------------------------
 
