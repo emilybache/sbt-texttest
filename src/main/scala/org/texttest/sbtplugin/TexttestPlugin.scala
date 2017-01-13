@@ -86,7 +86,6 @@ object TexttestPlugin extends AutoPlugin {
 
     },
     texttestRun := {
-      texttestInstall.value // install task is needed before the run task will be able to work
       val log = streams.value.log
       log.info(s"running texttest applications ${texttestAppNames.value} in ${baseDirectory.value}")
       val runner = new TexttestRunner(log)
