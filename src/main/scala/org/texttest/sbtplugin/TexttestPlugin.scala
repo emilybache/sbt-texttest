@@ -102,6 +102,7 @@ object TexttestPlugin extends AutoPlugin {
         texttestTestPathSelection.value,
         texttestTestNameSelection.value)
     },
+    unzipDependencyJars <<= unzipDependencyJars.dependsOn(compile in Compile),
     texttestInstall <<= texttestInstall.dependsOn(unzipDependencyJars),
     texttestRun <<= texttestRun.dependsOn(texttestInstall)
   )
